@@ -1,0 +1,12 @@
+{
+  "name": "Useful Drupal Utils",
+  "run_at": "doc-end",
+  "lces_init": false,
+  "userscript": true,
+  "excl": [
+    "aur-ui-prefs"
+  ],
+  "profiles": {
+    
+  }
+}
