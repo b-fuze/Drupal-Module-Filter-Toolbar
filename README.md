@@ -10,6 +10,10 @@ Just type on the page and now you're filtering, press `[enter]` repeatedly till 
 Here's a GIF showing what it happens as you type
 ![Screen Recording](http://i.imgur.com/sBGGzPe.gif "DMFT in action")
 
+## How to get it?
+
+Install GreaseMonkey (Firefox) or TamperMonkey (Chrome) then go [here](https://github.com/b-fuze/Drupal-Module-Filter-Toolbar/releases/download/v0.1.0/druseful.user.js), when it installs go to any Drupal module page and the toolbar should appear :)
+
 ## Hotkeys
  * **Enter:** Scroll to next match on the page
  * **Ctrl + Enter:** Toggle condensed list of matches
