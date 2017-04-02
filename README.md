@@ -12,10 +12,13 @@ Here's a GIF showing what it happens as you type
 
 ## How do I get it?
 
-Install GreaseMonkey (Firefox) or TamperMonkey (Chrome) then go [here](https://github.com/b-fuze/Drupal-Module-Filter-Toolbar/releases/download/v0.1.0/druseful.user.js), when it installs go to any Drupal module page and the toolbar should appear :)
+Install GreaseMonkey (Firefox) or TamperMonkey (Chrome, Opera) then go [here](https://github.com/b-fuze/Drupal-Module-Filter-Toolbar/releases/download/v0.1.0/druseful.user.js), when it installs go to any Drupal module page and the toolbar should appear :)
 
 ## Hotkeys
  * **Enter:** Scroll to next match on the page
  * **Ctrl + Enter:** Toggle condensed list of matches
  * **Ctrl + M:** Switch between module or category filtering
  * **Esc:** Collapse list of matches (same as **Ctrl + Enter** when expanded)
+
+## Disclaimer
+I made it in about two days time, a quick side project to help me focus on my work in Drupal (lots of enabling, disabling, and uninstalling modules...) so I needed a nice quick way to do it.
