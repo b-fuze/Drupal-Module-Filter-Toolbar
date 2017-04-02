@@ -1,5 +1,5 @@
-# Drupal Module Filter Toolbar
-A quick, clean, and unintrusive Drupal module filter that behaves like a Drupal-aware browser search. It's built with AUR (a Javascript framework of mine) and [LCES](https://github.com/b-fuze/lces) (a library of mine that AUR relies heavily on.)
+# Drupal 7 Module Filter Toolbar
+A quick, clean, and unintrusive Drupal 7 module filter that behaves like a Drupal-aware browser search. It's built with AUR (a Javascript framework of mine) and [LCES](https://github.com/b-fuze/lces) (a library of mine that AUR relies heavily on.)
 
 ## And?
 Well, aside from some neat [hotkeys](#hotkeys) that's pretty much it. Have a look at some screenshots :D
@@ -21,4 +21,6 @@ Install GreaseMonkey (Firefox) or TamperMonkey (Chrome, Opera) then go [here](ht
  * **Esc:** Collapse list of matches (same as **Ctrl + Enter** when expanded)
 
 ## Disclaimer
-I made it in about two days time, a quick side project to help me focus on my work in Drupal (lots of enabling, disabling, and uninstalling modules...) so I needed a nice quick way to do it.
+I made it in about two days time, a quick side project to help me focus on my work in Drupal (lots of enabling, disabling, and uninstalling modules...) so I just needed a quick and hassle-free way to do it.
+
+I've never used Drupal 8 up to this point, but DMFT can very likely be ported easily, you will likely just need to change about 2 lines of code.
