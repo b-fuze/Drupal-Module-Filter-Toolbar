@@ -270,6 +270,11 @@ table.sticky-header {
       font-style: italic;
     }
     
+    &.dum-status-indexing {
+      // font-weight: bold;
+      color: $bg-color-saturated;
+    }
+    
     .dum-matches-link {
       color: #A674A6;
       font-weight: bold;

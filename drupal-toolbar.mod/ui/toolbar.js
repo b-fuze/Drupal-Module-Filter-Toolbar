@@ -23,7 +23,7 @@ function ToolBar() {
     child: jSh.c("span", null, "×")
   });
   
-  this.queryStatus = queryStatus = jSh.d(".dum-main-query-status.dum-empty-query", "Empty query");
+  this.queryStatus = queryStatus = jSh.d(".dum-main-query-status.dum-empty-query.dum-status-indexing", "Indexing modules...");
   
   this.matches = matches = jSh.d(".dum-main-matches");
   
@@ -73,33 +73,58 @@ function ToolBar() {
   ]);
   
   // LCES States
+  this.setState("ready", false);
   this.setState("matchesVisible", false);
   this.setState("query", "");
   this.setState("queryModules", true);
   this.setState("curMatches", null);
   
   // Events
-  input.addEventListener("input", function() {
-    that.query = this.value;
-  });
-  
-  input.addEventListener("keydown", function(e) {
-    switch (e.keyCode) {
-      case 13:
-        if (that.query.trim() && e.ctrlKey) {
-          that.matchesVisible = !that.matchesVisible;
-        }
-        break;
-      case 77:
-        if (e.ctrlKey) {
-          that.queryModules = !that.queryModules;
-        }
-        break;
-    }
-  });
-  
   inputClear.addEventListener("click", function() {
     that.query = "";
+  });
+  
+  // Only do stuff when the bar is ready
+  function onlyWhenReady() {
+    return that.ready;
+  }
+  
+  this.addStateCondition("query", onlyWhenReady);
+  this.addStateCondition("matchesVisible", onlyWhenReady);
+  this.addStateCondition("queryModules", onlyWhenReady);
+  this.addStateCondition("curMatches", onlyWhenReady);
+  
+  // Start filtering input when all things on the page have been loaded
+  this.addStateListener("ready", function(ready) {
+    queryStatus.classList.remove("dum-status-indexing");
+    queryStatus.textContent = "Empty query";
+    
+    // Add input events
+    input.addEventListener("input", function() {
+      that.query = this.value;
+    });
+    
+    input.addEventListener("keydown", function(e) {
+      switch (e.keyCode) {
+        case 13:
+          if (that.query.trim() && e.ctrlKey) {
+            that.matchesVisible = !that.matchesVisible;
+          }
+          break;
+        case 77:
+          if (e.ctrlKey) {
+            that.queryModules = !that.queryModules;
+          }
+          break;
+      }
+    });
+    
+    // Check if there's anything in the <input>
+    var inputValue = input.value.trim();
+    
+    if (inputValue) {
+      that.query = inputValue;
+    }
   });
   
   // Update input when necessary

@@ -5,9 +5,10 @@ A quick, clean, and unintrusive Drupal 7 module filter that behaves like a Drupa
 Well, aside from some neat [hotkeys](#hotkeys) that's pretty much it. Have a look at some screenshots :D
 
 ![Screenshot](http://i.imgur.com/tyBGRSK.png "Just type on the page and stuff get highlighted")
+
 Just type on the page and now you're filtering, press `[enter]` repeatedly till you find what you're looking for!
 
-Here's a GIF showing what it happens as you type
+Here's a GIF showing what happens as you type
 ![Screen Recording](http://i.imgur.com/sBGGzPe.gif "DMFT in action")
 
 ## How do I get it?

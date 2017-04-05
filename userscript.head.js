@@ -2,7 +2,7 @@
 // @name         Druseful!!!
 // @namespace    druseful
 // @version      0.1.0
-// @description  AnimeZero Lights Out Bindings
+// @description  Drupal Module Filter
 // @author       Anime Programming Team
 // @contributor  Mike32 (b-fuze)
 // @homepage     http://www.animeultima.io/forums/f118/welcome-au-programming-section-51711/

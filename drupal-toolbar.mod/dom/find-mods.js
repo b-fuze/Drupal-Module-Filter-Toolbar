@@ -51,7 +51,7 @@ function HighlightedResult(dom, isModule, mainModel, focusModel, name) {
 jSh.inherit(HighlightedResult, lces.types.component);
 
 reg.interface = {
-  indexCategories() {
+  indexCategories(done) {
     var validFieldset = /^edit-modules-/i;
     var fieldsets = jSh("fieldset").filter(function(fset) {
       return validFieldset.test(fset.id);
@@ -70,26 +70,27 @@ reg.interface = {
     focusModel.setState("focused");
     focusModel.setExclusiveState("focused", true, 1);
     
-    for (var i=0,l=fieldsets.length; i<l; i++) {
-      var fsetDOM    = fieldsets[i];
-      var fsetCapDOM = fsetDOM.jSh(".fieldset-title")[0];
+    var fsCount = fieldsets.length;
+    var maxFS   = 4;
+    var maxMod  = 10;
+    
+    // The `addModules` and `addCategories` functions are invoked
+    // via setTimeout instead of one big simple for loop (initial
+    // implementation) to implement asynchronous behaviour.
+    //
+    // This was implemented because DMFT would make the browser freeze
+    // for a bit while it was busy trying to find all the modules on
+    // a page, they try to prevent that.
+    
+    // Loop fields
+    function addModules(fieldset, modules, index, next) {
+      var modCount    = modules.length;
+      var curMaxIndex = modCount <= maxMod
+                        ? modCount
+                        : Math.min(index + maxMod, modCount);
       
-      var fieldset = {
-        dom: fsetCapDOM,
-        name: (fsetDOM.jSh(".fieldset-title")[0].jSh(0).nextSibling.wholeText + "").toLowerCase().trim(),
-        modules: [],
-        model: new HighlightedResult(fsetCapDOM, false, mainModel, focusModel)
-      };
-      
-      fsetObj[fieldset.name] = fieldset;
-      fsetArr.push([fieldset.name, ""]);
-      
-      // Get category modules
-      var modules = fsetDOM.jSh("tbody tr td > label[for]");
-      
-      // Loop category modules
-      for (var j=0,l2=modules.length; j<l2; j++) {
-        var modDOM         = modules[j];
+      for (; index<curMaxIndex; index++) {
+        var modDOM         = modules[index];
         var modName        = modDOM.textContent.trim();
         var modMachineName = modName.toLowerCase();
         
@@ -103,24 +104,63 @@ reg.interface = {
         modArr.push([modMachineName, ""]);
         fieldset.modules.push(modMachineName);
       }
+      
+      // Increment to confirm status or move on to next batch of mods
+      index++;
+      
+      if (index >= modCount) {
+        // We're done, move on to the next category
+        next();
+      } else {
+        // Wait (20ms) before we move on to the next batch of modules
+        setTimeout(addModules, 20, fieldset, modules, index, next);
+      }
     }
     
-    // Sort modules and cats
-    // fsetArr.sort(function(a, b) {
-    //   return aBeforeB(a[0], b[0]) ? -1 : 1;
-    // });
-    //
-    // modArr.sort(function(a, b) {
-    //   return aBeforeB(a[0], b[0]) ? -1 : 1;
-    // });
+    function addCategories(index) {
+      var fs = fieldsets[index];
+      
+      if (fs) {
+        var fsetDOM    = fs;
+        var fsetCapDOM = fsetDOM.jSh(".fieldset-title")[0];
+        
+        var fieldset = {
+          dom: fsetCapDOM,
+          name: (fsetDOM.jSh(".fieldset-title")[0].jSh(0).nextSibling.wholeText + "").toLowerCase().trim(),
+          modules: [],
+          model: new HighlightedResult(fsetCapDOM, false, mainModel, focusModel)
+        };
+        
+        fsetObj[fieldset.name] = fieldset;
+        fsetArr.push([fieldset.name, ""]);
+        
+        // Get category modules
+        var modules = fsetDOM.jSh("tbody tr td > label[for]");
+        
+        // Asynchronously get the modules
+        addModules(fieldset, modules, 0, function() {
+          index++;
+          
+          if (index >= maxFS && index % maxFS === 0) {
+            // Wait a bit (75ms) for other stuff to happen then continue
+            setTimeout(addCategories, 75, index);
+          } else {
+            addCategories(index);
+          };
+        });
+      } else {
+        done({
+          categories: fsetArr.reverse(),
+          categoryMap: fsetObj,
+          modules: modArr.reverse(),
+          moduleMap: modMap,
+          model: mainModel,
+          focusModel: focusModel
+        });
+      }
+    }
     
-    return {
-      categories: fsetArr.reverse(),
-      categoryMap: fsetObj,
-      modules: modArr.reverse(),
-      moduleMap: modMap,
-      model: mainModel,
-      focusModel: focusModel
-    };
+    // Start asynchronously loading modules and categories
+    addCategories(0);
   }
 }

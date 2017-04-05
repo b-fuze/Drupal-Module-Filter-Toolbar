@@ -10,11 +10,18 @@ var findMods = AUR.import("./dom/find-mods");
 var ToolBar = AUR.import("./ui/toolbar");
 
 AUR.on("load", function() {
-  setTimeout(function() {
-    var catModMap = findMods.indexCategories();
-    var bar = new ToolBar();
+  function startToolBar() {
+    var catModMap;
+    var resultModel;
     
-    var resultModel = catModMap.model;
+    findMods.indexCategories(function(map) {
+      catModMap   = map;
+      resultModel = catModMap.model;
+      
+      bar.ready = true;
+    });
+    
+    var bar = new ToolBar();
     
     var matchedCats;
     var matchedMods;
@@ -194,7 +201,7 @@ AUR.on("load", function() {
     });
     
     bar.input.addEventListener("keyup", function(e) {
-      if (!bar.query.trim())
+      if (!bar.ready || !bar.query.trim())
         return;
       
       if (curMatchesDOM && e.keyCode === 13 && !e.ctrlKey) {
@@ -250,5 +257,9 @@ AUR.on("load", function() {
     });
     
     bar.input.focus();
+  }
+  
+  setTimeout(function() {
+    startToolBar();
   }, 10);
 });
