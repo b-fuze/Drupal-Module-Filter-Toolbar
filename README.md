@@ -13,7 +13,7 @@ Here's a GIF showing what happens as you type
 
 ## How do I get it?
 
-Install GreaseMonkey (Firefox) or TamperMonkey (Chrome, Opera) then go [here](https://github.com/b-fuze/Drupal-Module-Filter-Toolbar/releases/download/v0.1.0/druseful.user.js), when it installs go to any Drupal module page and the toolbar should appear :)
+Install GreaseMonkey (Firefox) or TamperMonkey (Chrome, Opera) then go [here](https://github.com/b-fuze/Drupal-Module-Filter-Toolbar/releases/download/v0.1.5/druseful.user.js), when it installs go to any Drupal module page and the toolbar should appear :)
 
 ## Hotkeys
  * **Enter:** Scroll to next match on the page
