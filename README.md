@@ -25,3 +25,6 @@ Install GreaseMonkey (Firefox) or TamperMonkey (Chrome, Opera) then go [here](ht
 I made it in about two days time, a quick side project to help me focus on my work in Drupal (lots of enabling, disabling, and uninstalling modules...) so I just needed a quick and hassle-free way to do it.
 
 I've never used Drupal 8 up to this point, but DMFT can be ported easily, you will likely just need to change about 2 lines of code.
+
+## License
+Apache License 2.0
