@@ -1,6 +1,6 @@
 // Nothing Drupal Modules bla bla bla
 AUR_NAME = "Plz fix modules... Plz...";
-AUR_DESC = "Wtf man";
+AUR_DESC = "What man";
 AUR_VERSION = [0, 1, 0];
 AUR_AUTHORS = ["Mike32 (b-fuze)"];
 AUR_RESTART = false;
